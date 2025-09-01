@@ -139,6 +139,18 @@ Terminal B
 
 ---
 
+## Benchmark Results (summary)
+
+```bash
+| Variant             | Message Size | Repeats | Avg RTT | p95 RTT | Throughput |
+|---------------------|--------------|---------|---------|---------|------------|
+| Python threaded     | 1 KB         | 2000    | ~0.030 ms | ~0.053 ms | 32 MB/s |
+| Python asyncio      | 16 KB        | 1000    | 0.089 ms | 0.122 ms | 173 MB/s |
+| C++ POSIX client    | 1 msg        | 1       | 0.028 ms | -       | - |
+```
+
+---
+
 ## Project Layout
 
 ```text
@@ -157,6 +169,6 @@ Terminal B
 
 ## Future Improvements
 
-- Add asyncio-based server for higher concurrency.
+- Add multi-connection benchmark & charts.
 - Add SSL/TLS support for secure echo.
 - Automate benchmarking (latency + throughput graphs).

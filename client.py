@@ -56,11 +56,23 @@ def main():
     parser.add_argument("--message", default="Hello, AWS!", help='Message to send (default: "Hello, AWS!")')
     parser.add_argument("--bench", action="store_true", help="Run benchmark mode instead of single message")
     parser.add_argument("--repeat", type=int, default=1000, help="Number of messages in benchmark mode (default: 1000)")
+    parser.add_argument("--parallel", type=int, default=1, help="Number of parallel clients for benchmark mode")
     args = parser.parse_args()
 
     if args.bench:
-        benchmark(args.host, args.port, args.message, repeat=args.repeat)
+        if args.parallel == 1:
+            benchmark(args.host, args.port, args.message, repeat=args.repeat)
+        else:
+            import concurrent.futures
+            with concurrent.futures.ThreadPoolExecutor(max_workers=args.parallel) as pool:
+                futures = [
+                    pool.submit(benchmark, args.host, args.port, args.message, args.repeat)
+                    for _ in range(args.parallel)
+                ]
+                for f in futures:
+                    f.result()
         return
+
 
     payload = args.message.encode("utf-8")
 

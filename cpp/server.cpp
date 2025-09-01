@@ -2,6 +2,8 @@
 // ------------------------------------------
 // Listens on a given port, accepts one client at a time,
 // and echoes back any bytes received until the client closes.
+// Note: single-threaded by design (one client at a time).
+// For higher concurrency, spawn a thread per connection or use non-blocking I/O.
 
 #include <arpa/inet.h>
 #include <netdb.h>
