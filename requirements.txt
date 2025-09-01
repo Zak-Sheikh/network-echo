@@ -1,0 +1,1 @@
+# stdlib only (sockets, asyncio) — no external dependencies
