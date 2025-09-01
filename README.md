@@ -53,6 +53,35 @@ This project demonstrates the fundamentals of **socket programming**,
 
 ---
 
+## Makefile shortcuts
+
+Use these targets if you have `make` installed.
+
+Python (threaded and asyncio):
+
+```bash
+make run-server          # starts server.py on 5050
+make run-server-async    # starts server_async.py on 5051
+make run-client          # runs client.py against 5050
+make bench-1k            # 1 KB payload benchmark against 5050
+```
+
+C++ build & run:
+
+```bash
+make build-cpp           # builds cpp/build/server and cpp/build/client
+make run-cpp-server      # runs C++ server on 5052
+make run-cpp-client      # runs C++ client against 5052
+```
+
+Cleanup:
+
+```bash
+make clean               # removes cpp/build/
+```
+
+---
+
 ## Asyncio Variant
 
 Run the event-loop server:
